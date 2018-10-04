@@ -1,4 +1,6 @@
-def setPartition(problem, bitString):
+problem = []
+
+def setPartition(bitString):
     sums = [0, 0]
     for i in range(len(problem)):
         sums[bitString[i]] += problem[i]
