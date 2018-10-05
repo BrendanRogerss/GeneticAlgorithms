@@ -1,4 +1,5 @@
 import random
+import genotype
 
 # edits the bitString passed in, also returns it
 def mutate(genotype, chance):
@@ -11,3 +12,9 @@ def mutate(genotype, chance):
 def deepMutate(genotype, chance):
     newGenotype = [i for i in genotype]
     return mutate(newGenotype, chance)
+
+def flipOne(genome):
+    bitString = genome.getBitString().copy()
+    index = random.randint(0,len(bitString)-1)
+    bitString[index] = not bitString[index]
+    return bitString

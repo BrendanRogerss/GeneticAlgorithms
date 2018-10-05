@@ -73,8 +73,8 @@ def simmulated_annealing(matrix, solution):
 
         #update/cool the stystem
 
-        t = T * cooling_rate
-
+        T = T * cooling_rate
+    return best_solution
 
 def solution_cost(instance, solution):
     #instance = matrix
