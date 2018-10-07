@@ -18,7 +18,7 @@ def readSetPartitioning(fileName):
         instance = []
         if lines[i]=='':
             i+=1
-        i
+
         for j in range(i+1,i+int(lines[i][0:2])+1):
             instance.append(float(lines[j]))
         i+=int(lines[i][0:2])+1

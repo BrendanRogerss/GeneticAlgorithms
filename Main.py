@@ -27,12 +27,13 @@ def hillSearch():
     while True:
         solution = h.run(solution,10000, 0.1)
         print(solution.fitness)
+        #print(solution == b.run(solution))
 
 def simAneal():
     solution = genotype.genotype()
     solution.generateBitstring(len(problem))
     while True:
-        solution = s.run(solution, 100, s.tempDecay)
+        solution = s.run(solution, 10000, s.tempDecay)
         #print(solution.getBitString(),solution.fitness)
 
 
@@ -43,4 +44,6 @@ def tabu():
         solution = t.run(solution, 3, 100)
         #print(solution.getBitString(),solution.fitness)
     print(solution == b.run(solution))
-tabu()
+
+
+simAneal()

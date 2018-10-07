@@ -18,3 +18,7 @@ def flipOne(genome):
     index = random.randint(0,len(bitString)-1)
     bitString[index] = not bitString[index]
     return bitString
+
+def onePointCrossover(genomeA, genomeB, index):
+    newBitstring = genomeA.getBitString()[:index]+genomeB.getBitString()[index:]
+    return genotype.genotype(newBitstring)
