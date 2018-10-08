@@ -1,4 +1,5 @@
 import random
+import fitness
 
 def placeHolder(a,b):
     return None
@@ -15,8 +16,9 @@ class genotype():
             self.bitString = bitString
         else:
             self.bitString = []
+            self.generateBitstring()
+        self.setFitness()
 
-        self.fitness = float('inf')
 
     def setFitness(self):
         self.fitness = fitnessFunction(self.bitString)
@@ -25,8 +27,8 @@ class genotype():
     def getFitness(self):
         return self.fitness
 
-    def generateBitstring(self,n):
-        for i in range(n):
+    def generateBitstring(self):
+        for i in range(len(fitness.problem)):
             self.bitString.append(random.randint(0,1))
 
     def getBitString(self):

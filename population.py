@@ -2,18 +2,34 @@ import genotype
 import random
 
 
-def generatePop(popSize, genoSize):
+def generatePop(popSize):
     pop = []
     for i in range(popSize):
         pop.append(genotype.genotype())
-        pop[i].generateBitstring(genoSize)
     return pop
 
-def samplePop(population, sampleSize):
+
+def randomSample(population, sampleSize):
     if population < sampleSize:
         assert "population less than sample size"
     indexes = set()
-    while len(indexes)<sampleSize:
-        set.add(random.randint(0,len(population)-1))
+    while len(indexes) < sampleSize:
+        set.add(random.randint(0, len(population) - 1))
     newPop = [population[i] for i in indexes]
+    return newPop
+
+
+def sort(pop):
+    return sorted(pop, key=lambda x: x.getFitness())
+
+def subSample(pop):
+    newPopIndex = set()
+    newPopIndex.add(0)
+    for i in range(3):
+        newPopIndex.add(random.randint(1, 30))
+        newPopIndex.add(random.randint(31, 60))
+        newPopIndex.add(random.randint(61, 99))
+    while len(newPopIndex) < 10:
+        newPopIndex.add(random.randint(1,99))
+    newPop = [pop[i] for i in newPopIndex]
     return newPop
