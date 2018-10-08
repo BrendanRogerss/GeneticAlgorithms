@@ -1,4 +1,5 @@
 import genotype
+import itertools
 
 
 def run(genome):
@@ -11,3 +12,13 @@ def run(genome):
         if newGenome.getFitness() < genome.getFitness():
             best = newGenome
         return best
+
+def bruteForce():
+    best = genotype.genotype()
+    n = len(best.getBitString())
+    bitStrings = list(map(list, itertools.product([0, 1], repeat=n)))
+    for i in bitStrings:
+        new = genotype.genotype(i)
+        if new.getFitness() < best.getFitness():
+            best = new
+    return best
