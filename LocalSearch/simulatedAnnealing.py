@@ -16,14 +16,13 @@ def run(genome, iterations, tempFunction):
             current = new
             if current.getFitness() <= best.getFitness():
                 best = current
-                print(best.getFitness())
 
         temp = tempFunction(temp)
     return best
 
 
 def tempDecay(temp):
-    return temp*0.92
+    return temp*0.99
 
 
 def accept(current, new, temp):

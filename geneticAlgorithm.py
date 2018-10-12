@@ -13,11 +13,13 @@ def ga(failureLimit, popSize=100):
 
     while noImprove < failureLimit:
         pop = population.subSample(pop)
-        while len(pop) < popSize:
+        newPop = []
+        while len(newPop) < popSize-len(pop):
             newGenome = mutators.onePointCrossover(pop[randint(0,len(pop) - 1)], pop[randint(0,len(pop) - 1)],
                                                    randint(0, len(pop[0].getBitString()) - 1))
             newGenome = mutators.mutate(newGenome, 0.05)
-            pop.append(newGenome)
+            newPop.append(newGenome)
+        pop = newPop+pop
         pop = population.sort(pop)
 
         if pop[0].getFitness() < best.getFitness():

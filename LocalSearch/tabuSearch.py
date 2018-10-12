@@ -23,13 +23,12 @@ def run(genome, tenure, iterations):
 
         if current.getFitness() < best.getFitness():
             best = current
-            print(best.getFitness())
     return best
 
 
 def updateTabu(tabu, tenure, change):
     for i in range(len(tabu)):
         if tabu[i] != 0:
-            tabu[i] -= tabu[i]
+            tabu[i] -= 1
     tabu[change] = tenure
     return tabu
