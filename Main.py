@@ -10,7 +10,7 @@ import memeticAlgorithm as ma
 problems = scanner.readSetPartitioning('SetProblems/NPInstances.dat')
 # problem = scanner.readShittySetPartitioning("SetProblems/a.csv")
 #fitness.problem = problem
-genotype.fitnessFunction = fitness.setPartition
+genotype.fitnessFunction = fitness.numberPartition
 
 
 def randomSearch():

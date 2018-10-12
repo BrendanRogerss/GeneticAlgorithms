@@ -9,10 +9,11 @@ def run(genome, iterations, tempFunction):
 
     best = current = genome
     temp = 2792964000
+
     for i in range(iterations):
-        new = genotype.genotype(mutators.flipOne(current))
-        new.setFitness()
-        if accept(current.getFitness(), new.getFitness(), temp):
+        new = genotype.genotype(mutators.flipOne(current)) # flip random bit
+
+        if accept(current.getFitness(), new.getFitness(), temp): # check acceptance
             current = new
             if current.getFitness() <= best.getFitness():
                 best = current

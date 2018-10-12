@@ -1,9 +1,11 @@
 import genotype
 import itertools
 
+# these are mostly for testing
 
 def run(genome):
     best = genome
+    # returns the best neighbour
     for i in range(len(genome.getBitString())):
         bitString = genome.getBitString().copy()
         bitString[i] = not bitString[i]
@@ -13,6 +15,7 @@ def run(genome):
             best = newGenome
         return best
 
+#bruteforces all possible solutions
 def bruteForce():
     best = genotype.genotype()
     n = len(best.getBitString())

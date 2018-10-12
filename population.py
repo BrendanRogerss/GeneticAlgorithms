@@ -3,6 +3,7 @@ import random
 
 
 def generatePop(popSize):
+    # randomly generate population
     pop = []
     for i in range(popSize):
         pop.append(genotype.genotype())
@@ -10,6 +11,7 @@ def generatePop(popSize):
 
 
 def randomSample(population, sampleSize):
+    # dont think i actually use this....
     if population < sampleSize:
         assert "population less than sample size"
     indexes = set()
@@ -23,6 +25,8 @@ def sort(pop):
     return sorted(pop, key=lambda x: x.getFitness())
 
 def subSample(pop):
+    # gets 4 from the top, 3 from the middle and 3 from the bottom
+    #TODO fix this so it isnt shit
     newPopIndex = set()
     newPopIndex.add(0)
     for i in range(3):

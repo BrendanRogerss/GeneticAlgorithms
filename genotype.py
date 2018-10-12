@@ -5,7 +5,7 @@ def placeHolder(a,b):
     return None
 
 
-fitnessFunction = placeHolder
+fitnessFunction = placeHolder # static function to swap between set cover and number partitioning
 
 
 class genotype():

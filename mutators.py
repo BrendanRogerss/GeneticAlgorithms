@@ -15,20 +15,20 @@ def deepMutate(genome, chance):
     newGenotype = genotype.genotype(genome.getBitString().copy())
     return mutate(newGenotype, chance)
 
-
+#randomly picks one to flip
 def flipOne(genome):
     bitString = genome.getBitString().copy()
     index = random.randint(0,len(bitString)-1)
     bitString[index] = not bitString[index]
     return bitString
 
-
+#flip a bit at given index
 def flipOneAt(genome, index):
     bitString = genome.getBitString().copy()
     bitString[index] = not bitString[index]
     return genotype.genotype(bitString)
 
-
+# simple crossover
 def onePointCrossover(genomeA, genomeB, index):
     newBitstring = genomeA.getBitString()[:index]+genomeB.getBitString()[index:]
     return genotype.genotype(newBitstring)
