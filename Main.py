@@ -38,27 +38,27 @@ def simAneal():
 
 
 def tabu():
-    for i in range(100):
-        solution = genotype.genotype()
-        solution = t.run(solution, 3, 1000)
-        print(solution.getBitString(),solution.fitness)
+    fitness.problem = problems[5]
+    #for i in problems:
+    #    fitness.problem = i
+    solution = genotype.genotype()
+    solution = t.run(solution, 15, 100000)
+    print(solution.fitness, solution.getBitString())
     #print(solution == b.run(solution))
 
 
 def memetic():
-    for i in problems:
+    for i in problems[5:]:
         fitness.problem = i
-        solution = ma.ga(200)
+        solution = ma.ga(400)
         with open("results.txt", "a") as myfile:
-            output = str(solution.getBitString())+" "+str(solution.getFitness())+"\n"
+            output = str(solution.getFitness())+" "+str(solution.getBitString())+"\n"
             print(output)
             myfile.write(output)
 
 
 if __name__ == "__main__":
-
-    for i in problems[:5]:
-        fitness.problem = i
-        # tabu()
-        best = b.bruteForce()
-        print(best.getBitString(), best.getFitness())
+    fitness.problem = problems[5]
+    bit = [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1]
+    s = genotype.genotype(bit)
+    print(b.run(s)==s)

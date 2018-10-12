@@ -1,19 +1,31 @@
 import random
 import genotype
+import mutators
+
 
 def run(genome, tenure, iterations):
     tabu = [0 for i in range(len(genome.getBitString()))]
-
+    current = best = genome
     for i in range(iterations):
-        newBitString = genome.getBitString().copy()
-        index = getViableIndex(tabu)
-        newBitString[index] = not newBitString[index]
-        newGenome = genotype.genotype(newBitString)
-        newGenome.setFitness()
-        if newGenome.getFitness() <= genome.getFitness():
-            genome = newGenome
-            updateTabu(tabu,tenure,index)
-    return genome
+        neighbours = []
+        for j in range(len(tabu)):
+            neighbours.append((j,mutators.flipOneAt(current,j)))
+        neighbours.sort(key=lambda x: x[1].getFitness())
+        index = 0
+        for k in range(len(neighbours)):
+            if tabu[neighbours[k][0]] == 0:
+                index = k
+                break
+        if neighbours[0][1].getFitness() < best.getFitness():
+            index = 0
+        current = neighbours[index][1]
+        tabu = updateTabu(tabu, tenure, neighbours[index][0])
+
+        if current.getFitness() < best.getFitness():
+            best = current
+            print(best.getFitness())
+    return best
+
 
 def updateTabu(tabu, tenure, change):
     for i in range(len(tabu)):
@@ -21,10 +33,3 @@ def updateTabu(tabu, tenure, change):
             tabu[i] -= tabu[i]
     tabu[change] = tenure
     return tabu
-
-def getViableIndex(tabu):
-    for i in range(10000):
-        index = random.randint(0,len(tabu)-1)
-        if tabu[index] == 0:
-            return index
-    print("No viable index")

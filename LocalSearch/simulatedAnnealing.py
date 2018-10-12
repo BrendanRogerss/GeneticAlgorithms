@@ -8,7 +8,7 @@ import math
 def run(genome, iterations, tempFunction):
 
     best = current = genome
-    temp = 1
+    temp = 2792964000
     for i in range(iterations):
         new = genotype.genotype(mutators.flipOne(current))
         new.setFitness()
