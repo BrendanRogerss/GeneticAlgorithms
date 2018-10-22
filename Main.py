@@ -5,12 +5,12 @@ import LocalSearch.simulatedAnnealing as s
 import LocalSearch.tabuSearch as t
 import geneticAlgorithm as ga
 import memeticAlgorithm as ma
+import LocalSearch.hillClimbing as h
 
-
-problems = scanner.readSetPartitioning('SetProblems/NPInstances.dat')
-# problem = scanner.readShittySetPartitioning("SetProblems/a.csv")
-#fitness.problem = problem
-genotype.fitnessFunction = fitness.numberPartition
+#problems = scanner.readNumberPartitioning('Data/NPInstances.dat')
+problems = scanner.readSetCover("Data/SCP_Instances/Instances/scp41.txt")
+genotype.fitnessFunction = fitness.setCover
+# decreased size in genotype by 1
 
 
 def randomSearch():
@@ -61,7 +61,7 @@ def memetic():
 
 def genetic():
 
-    for i in problems:
+    for i in problems[0]:
         fitness.problem = i
         results = []
         for j in range(5):
@@ -72,4 +72,7 @@ def genetic():
             myfile.write(output)
 
 if __name__ == "__main__":
-    simAneal()
+    fitness.problem = problems
+    print(len(problems))
+    solution =ga.ga(200)
+    print(solution.getFitness(), solution.getBitString())

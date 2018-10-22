@@ -28,7 +28,7 @@ class genotype():
         return self.fitness
 
     def generateBitstring(self):
-        for i in range(len(fitness.problem)):
+        for i in range(len(fitness.problem)-1):
             self.bitString.append(random.randint(0,1))
 
     def getBitString(self):
