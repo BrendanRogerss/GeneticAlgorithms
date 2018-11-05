@@ -11,7 +11,7 @@ def run(genome, iterations, tempFunction):
     temp = 2792964000
 
     for i in range(iterations):
-        new = genotype.genotype(mutators.flipOne(current)) # flip random bit
+        new = mutators.flipOne(current) # flip random bit
 
         if accept(current.getFitness(), new.getFitness(), temp): # check acceptance
             current = new

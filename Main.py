@@ -73,6 +73,7 @@ def genetic():
 
 if __name__ == "__main__":
     fitness.problem = problems
-    print(len(problems))
-    solution =ga.ga(200)
+    solution = genotype.genotype([1 for i in range(200)])
+    # solution = ma.memetic(5)
+    solution = h.run(solution, 10000, 1)
     print(solution.getFitness(), solution.getBitString())

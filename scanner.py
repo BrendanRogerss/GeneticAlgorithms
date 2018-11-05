@@ -34,7 +34,7 @@ def readSetCover(filename):
         line = f.readline()
         rows, columns = [int(s) for s in line.split(' ') if s.isdigit()]
 
-        matrix = np.empty([rows + 1, columns])
+        matrix = np.empty([rows + 1, columns], dtype=np.int64)
         columnIndex = 0
 
         while columnIndex < columns:
@@ -48,7 +48,7 @@ def readSetCover(filename):
             counter = 0
             while counter < setSize:
                 line = f.readline()
-                for number in map(int, re.findall('\d+',line)):
+                for number in map(int, re.findall('\d+', line)):
                     matrix[rowIndex][number-1] = 1
                     counter += 1
 
