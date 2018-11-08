@@ -6,11 +6,13 @@ import LocalSearch.tabuSearch as t
 import geneticAlgorithm as ga
 import memeticAlgorithm as ma
 import LocalSearch.hillClimbing as h
+import timeit
+import random
+import glob
 
 #problems = scanner.readNumberPartitioning('Data/NPInstances.dat')
-problems = scanner.readSetCover("Data/SCP_Instances/Instances/scp41.txt")
+problems = [scanner.readSetCover(file) for file in glob.glob("Data/SCP_Instances/Instances/*.txt")]
 genotype.fitnessFunction = fitness.setCover
-# decreased size in genotype by 1
 
 
 def randomSearch():
@@ -25,10 +27,10 @@ def simAneal():
     for i in problems:
         fitness.problem = i
         results = []
-        for j in range(5):
-            solution = s.run(genotype.genotype(), 100000, s.tempDecay)
+        for j in range(2):
+            solution = s.run(genotype.genotype(), 120, s.tempDecay)
             results.append(solution.getFitness())
-        with open("results/SimulatedAnnealing2.txt", 'a') as myfile:
+        with open("setCoverResults/SimulatedAnnealing.txt", 'a') as myfile:
             output = str(min(results))+" "+str((sum(results)/len(results)))+" "+str(max(results))+"\n"
             myfile.write(output)
 
@@ -38,10 +40,10 @@ def tabu():
     for i in problems:
         fitness.problem = i
         results = []
-        for j in range(5):
-            solution =t.run(genotype.genotype(), 15, 100000)
+        for j in range(2):
+            solution =t.run(genotype.genotype(), 15, 120)
             results.append(solution.getFitness())
-        with open("results/Tabu.txt", 'a') as myfile:
+        with open("setCoverResults/Tabu.txt", 'a') as myfile:
             output = str(min(results))+" "+str((sum(results)/len(results)))+" "+str(max(results))+"\n"
             myfile.write(output)
 
@@ -52,28 +54,37 @@ def memetic():
     for i in problems:
         fitness.problem = i
         results = []
-        for j in range(5):
-            solution =ma.memetic(20)
+        for j in range(2):
+            solution =ma.memetic(120)
             results.append(solution.getFitness())
-        with open("results/memetic.txt", 'a') as myfile:
+        with open("setCoverResults/memetic.txt", 'a') as myfile:
             output = str(min(results))+" "+str((sum(results)/len(results)))+" "+str(max(results))+"\n"
             myfile.write(output)
 
 def genetic():
 
-    for i in problems[0]:
+    for i in problems:
         fitness.problem = i
         results = []
-        for j in range(5):
-            solution =ga.ga(200)
+        for j in range(2):
+            print("starting new run")
+            solution =ga.ga(120)
             results.append(solution.getFitness())
-        with open("results/genetic.txt", 'a') as myfile:
+        with open("setCoverResults/genetic.txt", 'a') as myfile:
             output = str(min(results))+" "+str((sum(results)/len(results)))+" "+str(max(results))+"\n"
             myfile.write(output)
 
 if __name__ == "__main__":
-    fitness.problem = problems
-    solution = genotype.genotype([1 for i in range(200)])
-    # solution = ma.memetic(5)
-    solution = h.run(solution, 10000, 1)
-    print(solution.getFitness(), solution.getBitString())
+    #fitness.problem = problems[0]
+    # bitStrings = [[random.randint(0,1) for i in range(200)] for i in range(1000)]
+    start = timeit.default_timer()
+    # for i in bitStrings:
+    #     solution = genotype.genotype(i)
+    # solution = s.run(genotype.genotype(), 5, s.tempDecay)
+    # solution = h.run(solution, 1000, 1)
+    # print(solution.getFitness(),fitness.isValid(solution), solution.getBitString())
+
+    simAneal()
+
+    stop = timeit.default_timer()
+    print('Time: ', stop - start)

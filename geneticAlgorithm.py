@@ -2,16 +2,16 @@ import population
 import genotype
 import mutators
 from random import randint
+import timeCounter
 
-
-def ga(failureLimit, popSize=100):
+def ga(time, popSize=100):
     pop = population.generatePop(popSize) # make population
     pop = population.sort(pop) # sort by fitness
 
     best = pop[0] # best of the pop always index 0 after sort
     noImprove = 0
-
-    while noImprove < failureLimit:
+    timeCounter.start()
+    while not timeCounter.finished(time):
         pop = population.subSample(pop) # get new pop
         newPop = []
         while len(newPop) < popSize-len(pop):

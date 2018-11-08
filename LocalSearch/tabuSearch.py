@@ -1,12 +1,13 @@
 import random
 import genotype
 import mutators
+import timeCounter
 
-
-def run(genome, tenure, iterations):
+def run(genome, tenure, time):
     tabu = [0 for i in range(len(genome.getBitString()))] # generate list [0,0,0..,0]
     current = best = genome
-    for i in range(iterations): # for some numberof times
+    timeCounter.start()
+    while not timeCounter.finished(time): # for some numberof times
         neighbours = []
         for j in range(len(tabu)):
             neighbours.append((j,mutators.flipOneAt(current,j))) # store new solution in tuple, (indexFlipped, solution)
